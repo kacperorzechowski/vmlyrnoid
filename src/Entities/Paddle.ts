@@ -1,6 +1,7 @@
 import {PaddleMovement} from "../@types";
 import {GameObject} from "../core/Abstracts/GameObject";
 import {Collidable} from "../core/Interfaces/Collidable";
+import GameController from "../core/GameController";
 
 export interface IPaddle extends Collidable {
   width: number;
@@ -18,6 +19,7 @@ export class Paddle extends GameObject implements IPaddle {
   color: string = "hsl(206, 70%, 50%)";
   leftPressed: boolean = false;
   rightPressed: boolean = false;
+  gameController = GameController.getInstance();
 
   constructor() {
     super();
@@ -73,6 +75,10 @@ export class Paddle extends GameObject implements IPaddle {
     if (side === "RIGHT") {
       if (this.x + this.width < this.ctx.canvas.width)
         valid = true;
+    }
+
+    if (this.gameController.getStatus() !== "IN-PROGRESS") {
+      valid = false;
     }
 
     return valid;

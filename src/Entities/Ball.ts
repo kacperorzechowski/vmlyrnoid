@@ -2,6 +2,7 @@ import {GameObject} from "../core/Abstracts/GameObject";
 import {Collidable} from "../core/Interfaces/Collidable";
 import {IBlock} from "./Block";
 import {IPaddle} from "./Paddle";
+import GameController from "../core/GameController";
 
 export class Ball extends GameObject implements Collidable {
   x: number;
@@ -10,6 +11,7 @@ export class Ball extends GameObject implements Collidable {
   dx: number = 1;
   dy: number = -2;
   name: string = "ball";
+  gameController = GameController.getInstance();
 
   constructor() {
     super();
@@ -32,12 +34,15 @@ export class Ball extends GameObject implements Collidable {
 
     if (this.y + this.dy > this.ctx.canvas.height - this.radius) {
       console.log("game over")
+      this.gameController.setStatus("LOST");
       this.dy = 0;
       this.dx = 0;
     }
 
-    // this.x += this.dx;
-    // this.y += this.dy;
+    if (this.gameController.getStatus() === "IN-PROGRESS") {
+      this.x += this.dx;
+      this.y += this.dy;
+    }
   }
 
   handleCollision(collider: Collidable) {
@@ -82,6 +87,8 @@ export class Ball extends GameObject implements Collidable {
         block.hit = true;
         this.dy = - this.dy;
         this.dx = this.dx > 0 ? 2 : -2;
+
+        this.gameController.addScore();
       }
     }
   }

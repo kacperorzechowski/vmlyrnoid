@@ -4,14 +4,26 @@ import {CanvasHandler} from "./src/core/CanvasHandler";
 import {UpdateHandler} from "./src/core/UpdateHandler";
 import {Collidable} from "./src/core/Interfaces/Collidable";
 import {Board} from "./src/core/Board";
+import GameController from "./src/core/GameController";
 
 function main() {
   const paddle = new Paddle();
   const ball = new Ball();
   const board = new Board();
+  const gameController = GameController.getInstance();
 
   const canvasHandler = new CanvasHandler("game");
   const ctx = canvasHandler.getContext2d();
+
+  document.addEventListener("keydown", onSpaceDown.bind(this));
+
+  function onSpaceDown(event: KeyboardEvent) {
+    if (event.code === "Space") {
+      if (gameController.getStatus() === "NEW") {
+        gameController.setStatus("IN-PROGRESS");
+      }
+    }
+  }
 
   new UpdateHandler(update)
 
