@@ -3,10 +3,24 @@
   padding: 0;
 }
 
-.container {
+.game-container {
   display: flex;
   justify-content: center;
   padding-top: 50px;
+}
+
+.configuration {
+  display: none;
+  max-width: 1200px;
+  margin: 50px auto;
+
+  .row {
+    display: flex;
+
+    .input-color {
+      padding: 5px 10px;
+    }
+  }
 }
 
 #game {

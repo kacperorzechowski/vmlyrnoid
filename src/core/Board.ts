@@ -1,10 +1,12 @@
 import {GameObject} from "./Abstracts/GameObject";
 import {Block} from "../Entities/Block";
+import {blocksInRow, rows, boardConfig} from "../configuration/config";
+
+console.log(boardConfig);
+
 
 export class Board extends GameObject {
   blocks: Block[] = [];
-  blocksInRow: number = 13;
-  rows: number = 6;
   colors: string[][] = [];
 
   constructor() {
@@ -22,10 +24,12 @@ export class Board extends GameObject {
   }
 
   private initColors () {
-    for (let i = 0; i < this.rows; i++) {
+    for (let i = 0; i < rows; i++) {
       this.colors[i] = [];
-      for (let j = 0; j < this.blocksInRow; j++) {
-        this.colors[i][j] = `hsl(${Math.floor(Math.random() * 255)}, ${30 + i * 7}%, ${30 + j * 3}%)`;
+      for (let j = 0; j < blocksInRow; j++) {
+        // this.colors[i][j] = `hsl(${Math.floor(Math.random() * 255)}, ${30 + i * 7}%, ${30 + j * 3}%)`;
+        this.colors[i][j] = boardConfig[i][j];
+
         // console.log(`hsl(${Math.floor(Math.random() * 255)}, ${i * 15}%, ${j * 7}%)`)
       }
     }
@@ -36,8 +40,8 @@ export class Board extends GameObject {
     const block = new Block(20, 20);
     let separator = this.calcSeparator(block);
 
-    for (let i = 0; i < this.rows; i++) {
-      for (let j = 0; j < this.blocksInRow; j++) {
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < blocksInRow; j++) {
         this.blocks.push(
           new Block(j * (block.x + block.width) + separator, i * (block.y + block.height) + separator, this.colors[i][j])
         );
@@ -48,6 +52,6 @@ export class Board extends GameObject {
   }
 
   private calcSeparator(block: Block): number {
-    return (this.ctx.canvas.width - (this.blocksInRow * block.width) - 40) / (this.blocksInRow - 1);
+    return (this.ctx.canvas.width - (blocksInRow * block.width) - 40) / (blocksInRow - 1);
   }
 }

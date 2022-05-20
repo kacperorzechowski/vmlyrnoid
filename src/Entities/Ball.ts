@@ -36,8 +36,8 @@ export class Ball extends GameObject implements Collidable {
       this.dx = 0;
     }
 
-    this.x += this.dx;
-    this.y += this.dy;
+    // this.x += this.dx;
+    // this.y += this.dy;
   }
 
   handleCollision(collider: Collidable) {
