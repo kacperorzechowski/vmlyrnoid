@@ -38,12 +38,13 @@ export class Board extends GameObject {
 
   private initBlocks () {
     const block = new Block(20, 20);
+    const paddingTop = 15;
     let separator = this.calcSeparator(block);
 
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < blocksInRow; j++) {
         this.blocks.push(
-          new Block(j * (block.x + block.width) + separator, i * (block.y + block.height) + separator, this.colors[i][j])
+          new Block(j * (block.x + block.width) + separator, i * (block.y + block.height) + separator + paddingTop, this.colors[i][j])
         );
       }
     }

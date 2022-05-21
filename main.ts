@@ -5,11 +5,13 @@ import {UpdateHandler} from "./src/core/UpdateHandler";
 import {Collidable} from "./src/core/Interfaces/Collidable";
 import {Board} from "./src/core/Board";
 import GameController from "./src/core/GameController";
+import Score from "./src/Entities/Score";
 
 function main() {
   const paddle = new Paddle();
   const ball = new Ball();
   const board = new Board();
+  const score = new Score(20, 25);
   const gameController = GameController.getInstance();
 
   const canvasHandler = new CanvasHandler("game");
@@ -33,6 +35,7 @@ function main() {
     board.drawBlocks();
     paddle.draw();
     ball.draw();
+    score.draw();
 
     onCollision(paddle, ball);
     board.blocks.forEach((block) => {

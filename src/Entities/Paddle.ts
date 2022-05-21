@@ -16,7 +16,7 @@ export class Paddle extends GameObject implements IPaddle {
   name: string = "paddle";
   moveDistance: number = 7;
   centerX: number;
-  color: string = "hsl(206, 70%, 50%)";
+  color: string = "#00aaf8";
   leftPressed: boolean = false;
   rightPressed: boolean = false;
   gameController = GameController.getInstance();
@@ -52,9 +52,7 @@ export class Paddle extends GameObject implements IPaddle {
   }
 
   handleCollision(collider: Collidable) {
-    // if (collider.x === this.x && collider.y === this.y) {
-    //   console.log(typeof collider, 'from paddle')
-    // }
+    //
   }
 
   private createEntity() {
