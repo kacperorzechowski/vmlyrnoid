@@ -6,6 +6,7 @@ import {Collidable} from "./src/core/Interfaces/Collidable";
 import {Board} from "./src/core/Board";
 import GameController from "./src/core/GameController";
 import Score from "./src/Entities/Score";
+import {MessageController} from "./src/core/MessageController";
 
 function main() {
   const paddle = new Paddle();
@@ -13,6 +14,7 @@ function main() {
   const board = new Board();
   const score = new Score(20, 25);
   const gameController = GameController.getInstance();
+  const messageController = MessageController.getInstance()
 
   const canvasHandler = new CanvasHandler("game");
   const ctx = canvasHandler.getContext2d();
@@ -23,6 +25,10 @@ function main() {
     if (event.code === "Space") {
       if (gameController.getStatus() === "NEW") {
         gameController.setStatus("IN-PROGRESS");
+      }
+
+      if (["LOST", "WON"].includes(gameController.getStatus())) {
+        window.location.reload();
       }
     }
   }
@@ -36,6 +42,22 @@ function main() {
     paddle.draw();
     ball.draw();
     score.draw();
+
+    if (gameController.getStatus() === "NEW") {
+      messageController.drawStartMessage();
+    }
+
+    if (gameController.getStatus() === "LOST") {
+      messageController.drawLostMessage(gameController.getScore());
+    }
+
+    if (gameController.getStatus() === "WON") {
+      messageController.drawWonMessage();
+    }
+
+    if (board.blocks.filter(block => !block.hit).length === 0) {
+      gameController.setStatus("WON");
+    }
 
     onCollision(paddle, ball);
     board.blocks.forEach((block) => {

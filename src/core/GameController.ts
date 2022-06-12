@@ -1,4 +1,4 @@
-export type statuses = "NEW" | "IN-PROGRESS" | "LOST";
+export type statuses = "NEW" | "IN-PROGRESS" | "LOST" | "WON";
 
 export default class GameController {
   private static gameController: GameController;
