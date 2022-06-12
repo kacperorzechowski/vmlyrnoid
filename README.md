@@ -6,9 +6,9 @@ ___
 The game is created using TypeScript and Canvas with OOP paradigm.
 Why? I used to make games with Unity and I miss this approach in my daily routine as a Front-End developer (Vue, React).
 
-Whole concept is super simple. You move with ⬅️➡️ trying to bounce the ball with paddle.
+Whole concept is super simple. You move with ⬅️➡️ trying to bounce the ball with the paddle and destroy all the blocks on the board.
 
-Blocks on the board represent company logo I work for. This is because the idea of creating such game born on our meeting, on ☕️ break during workshops we were having.
+Blocks pattern represents company logo I work for. This is because the idea of creating such game born on our meeting, on ☕️ break during workshops we were having.
 
 ### Play tests
 You can play the game ~~here~~ (soon 🙃) or simply set it up yourself, check below 👇.
